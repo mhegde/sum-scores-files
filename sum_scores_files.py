@@ -19,11 +19,12 @@ def get_parser():
 
 def sum_files(files, folder):
     for i, f in enumerate(files):
+        print(f)
         df = pd.read_table(folder+'/'+f)
         if i != 0:
-            sum_df = sum([sum_df.iloc[:,2:], df.iloc[:, 2:]])
+            sum_df = sum([sum_df.iloc[:,:], df.iloc[:, 2:]])
         else:
-            sum_df = df
+            sum_df = df.iloc[:,2:]
             colnames = list(df.columns)
             col0 = colnames[0]
             col1 = colnames[1]
