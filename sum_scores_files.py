@@ -22,7 +22,10 @@ def sum_files(files, folder):
         print(f)
         df = pd.read_table(folder+'/'+f)
         if i != 0:
-            sum_df = sum([sum_df.iloc[:,:], df.iloc[:, 2:]])
+            df2 = df.iloc[:, 2:]
+            sum_df, df2 = sum_df.align(df2, fill_value=0)
+            sum_df = sum_df + df2
+            #sum_df = sum([sum_df.iloc[:,:], df.iloc[:, 2:]])
         else:
             sum_df = df.iloc[:,2:]
             colnames = list(df.columns)
